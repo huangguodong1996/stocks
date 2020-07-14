@@ -3,3 +3,7 @@ server:
 spring:
   application:
     name: stocks
+
+juhe:
+  appkey: 1a93da30f78a60343acee02d29762626
+  url: http://web.juhe.cn:8080/finance/stock/hs

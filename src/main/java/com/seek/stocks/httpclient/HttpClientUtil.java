@@ -2,6 +2,7 @@ package com.seek.stocks.httpclient;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.seek.stocks.utils.Constants;
 import org.apache.catalina.connector.Response;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
@@ -14,11 +15,12 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CancellationException;
 
 public class HttpClientUtil  {
 
 
-    public static void get(String url , Map<String,String> param) throws IOException {
+    public static JSONObject get(String url , Map<String,String> param) throws IOException {
         JSONObject result = new JSONObject();
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         CloseableHttpResponse response = null;
@@ -32,12 +34,12 @@ public class HttpClientUtil  {
         if(Response.SC_OK != statusCode){
             result.put("code",statusCode);
         }
+        result.put("code", Constants.TRAN_CODE_SUCCESS);
 
         HttpEntity entity = response.getEntity();
-        System.out.println("响应码:"+statusCode);
-        System.out.println("响应内容长度为:" + entity.getContentLength());
-        System.out.println("响应内容为:" + EntityUtils.toString(entity));
-
+        result.put("length",entity.getContentLength());
+        result.put("show",EntityUtils.toString(entity));
+        return result;
     }
 
     private static String setUrl(String url,Map<String,String> param) {

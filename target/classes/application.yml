@@ -3,3 +3,12 @@ server:
 spring:
   application:
     name: stocks
+
+#聚合数据 免费股票查询接口 每天100次
+juhe:
+  appkey: 1a93da30f78a60343acee02d29762626
+  url: http://web.juhe.cn:8080/finance/stock/hs
+
+#网易财经接口  刘建豪给的。6开头的加0  0开头的加1
+wangyi:
+  url: http://quotes.money.163.com/service/chddata.html?code=

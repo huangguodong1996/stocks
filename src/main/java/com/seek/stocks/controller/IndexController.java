@@ -36,6 +36,8 @@ public class IndexController {
 
         HashMap<String,String> param = new HashMap<String, String>();
 
+        gid = gid.startsWith("6")?"sh".concat(gid):gid;
+        gid = gid.startsWith("0")?"sz".concat(gid):gid;
         param.put("gid",gid);
         param.put("type",type);
         param.put("key",appkey);

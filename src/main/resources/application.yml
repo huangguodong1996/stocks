@@ -5,6 +5,7 @@ spring:
     name: stocks
 
 #聚合数据 免费股票查询接口 每天100次
+#股票编号，上海股市以sh开头，深圳股市以sz开头如：sh601009（type为0或者1时gid不传）
 juhe:
   appkey: 1a93da30f78a60343acee02d29762626
   url: http://web.juhe.cn:8080/finance/stock/hs
@@ -12,3 +13,9 @@ juhe:
 #网易财经接口  刘建豪给的。6开头的加0  0开头的加1
 wangyi:
   url: http://quotes.money.163.com/service/chddata.html?code=
+
+
+example:
+  start:
+    enable: true
+    config: 1,1,2,3,4,5,5,5,7

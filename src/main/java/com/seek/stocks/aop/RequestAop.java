@@ -49,15 +49,17 @@ public class RequestAop {
         Signature signature = joinPoint.getSignature();//获取增强方法信息
         String name = signature.getName();
         String limitKey = String.valueOf(getLimitKey(clz, name));
-        if(limitKey!=null && !"".equals(limitKey)){
-            semaphore = semaphoreMap.get(limitKey);
-            try {
+        try {
+            if(limitKey!=null && !"".equals(limitKey) && !"-1".equals(limitKey)){
+                semaphore = semaphoreMap.get(limitKey);
                 semaphore.acquire();
-                System.out.println(Thread.currentThread().getName()+":进入查询");
-                result=joinPoint.proceed();
-            } catch (Throwable e) {
-                e.printStackTrace();
-            } finally {
+            }
+            System.out.println(Thread.currentThread().getName()+":进入查询");
+            result=joinPoint.proceed();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        } finally {
+            if(limitKey!=null && !"".equals(limitKey) && !"-1".equals(limitKey)){
                 semaphore.release();
             }
         }
@@ -74,7 +76,7 @@ public class RequestAop {
                 }
             }
         }
-        return null;
+        return -1;
     }
 
     public static void main(String[] args) {

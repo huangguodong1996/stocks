@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seek.stocks.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.seek.stocks.model.Comment" >
+    <id column="commentId" property="commentId" jdbcType="INTEGER" />
+    <result column="memberId" property="memberId" jdbcType="INTEGER" />
+    <result column="videoId" property="videoId" jdbcType="INTEGER" />
+    <result column="publisherId" property="publisherId" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="zan" property="zan" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.seek.stocks.model.Comment" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commentId, memberId, videoId, publisherId, createTime, zan
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from comment
+    where commentId = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comment
+    where commentId = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.seek.stocks.model.Comment" >
+    insert into comment (commentId, memberId, videoId, 
+      publisherId, createTime, zan, 
+      content)
+    values (#{commentId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, 
+      #{publisherId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{zan,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.seek.stocks.model.Comment" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        commentId,
+      </if>
+      <if test="memberId != null" >
+        memberId,
+      </if>
+      <if test="videoId != null" >
+        videoId,
+      </if>
+      <if test="publisherId != null" >
+        publisherId,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="zan != null" >
+        zan,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="publisherId != null" >
+        #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zan != null" >
+        #{zan,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.seek.stocks.model.Comment" >
+    update comment
+    <set >
+      <if test="memberId != null" >
+        memberId = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null" >
+        videoId = #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="publisherId != null" >
+        publisherId = #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zan != null" >
+        zan = #{zan,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where commentId = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.seek.stocks.model.Comment" >
+    update comment
+    set memberId = #{memberId,jdbcType=INTEGER},
+      videoId = #{videoId,jdbcType=INTEGER},
+      publisherId = #{publisherId,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      zan = #{zan,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where commentId = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.seek.stocks.model.Comment" >
+    update comment
+    set memberId = #{memberId,jdbcType=INTEGER},
+      videoId = #{videoId,jdbcType=INTEGER},
+      publisherId = #{publisherId,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      zan = #{zan,jdbcType=INTEGER}
+    where commentId = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

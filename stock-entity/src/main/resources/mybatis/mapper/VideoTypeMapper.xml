@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seek.stocks.dao.VideoTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.seek.stocks.model.VideoType" >
+    <id column="typeId" property="typeId" jdbcType="INTEGER" />
+    <result column="typeName" property="typeName" jdbcType="VARCHAR" />
+    <result column="typeDetail" property="typeDetail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    typeId, typeName, typeDetail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from videoType
+    where typeId = #{typeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from videoType
+    where typeId = #{typeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.seek.stocks.model.VideoType" >
+    insert into videoType (typeId, typeName, typeDetail
+      )
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{typeDetail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.seek.stocks.model.VideoType" >
+    insert into videoType
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        typeId,
+      </if>
+      <if test="typeName != null" >
+        typeName,
+      </if>
+      <if test="typeDetail != null" >
+        typeDetail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeDetail != null" >
+        #{typeDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.seek.stocks.model.VideoType" >
+    update videoType
+    <set >
+      <if test="typeName != null" >
+        typeName = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeDetail != null" >
+        typeDetail = #{typeDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where typeId = #{typeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.seek.stocks.model.VideoType" >
+    update videoType
+    set typeName = #{typeName,jdbcType=VARCHAR},
+      typeDetail = #{typeDetail,jdbcType=VARCHAR}
+    where typeId = #{typeId,jdbcType=INTEGER}
+  </update>
+</mapper>

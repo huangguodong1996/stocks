@@ -19,3 +19,15 @@ example:
   start:
     enable: true
     config: 1,1,2,3,4,5,5,5,7
+
+curator:
+  retryCount: 5
+  elapsedTimeMs: 5000
+  connectString: 127.0.0.1:2181
+  sessionTimeOutMs: 6000
+  connectionTimeOutMs: 5000
+
+rocketmq:
+  nameServer: 127.0.0.1:9876
+  topic: topic_family
+

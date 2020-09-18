@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seek.stocks.dao.VideoMapper" >
+  <resultMap id="BaseResultMap" type="com.seek.stocks.model.Video" >
+    <id column="videoId" property="videoId" jdbcType="INTEGER" />
+    <result column="videoName" property="videoName" jdbcType="VARCHAR" />
+    <result column="videoType" property="videoType" jdbcType="INTEGER" />
+    <result column="videoSize" property="videoSize" jdbcType="VARCHAR" />
+    <result column="videoTimeSize" property="videoTimeSize" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="uploadMember" property="uploadMember" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    videoId, videoName, videoType, videoSize, videoTimeSize, path, uploadMember
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from video
+    where videoId = #{videoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from video
+    where videoId = #{videoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.seek.stocks.model.Video" >
+    insert into video (videoId, videoName, videoType, 
+      videoSize, videoTimeSize, path, 
+      uploadMember)
+    values (#{videoId,jdbcType=INTEGER}, #{videoName,jdbcType=VARCHAR}, #{videoType,jdbcType=INTEGER}, 
+      #{videoSize,jdbcType=VARCHAR}, #{videoTimeSize,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{uploadMember,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.seek.stocks.model.Video" >
+    insert into video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="videoId != null" >
+        videoId,
+      </if>
+      <if test="videoName != null" >
+        videoName,
+      </if>
+      <if test="videoType != null" >
+        videoType,
+      </if>
+      <if test="videoSize != null" >
+        videoSize,
+      </if>
+      <if test="videoTimeSize != null" >
+        videoTimeSize,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="uploadMember != null" >
+        uploadMember,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="videoId != null" >
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="videoName != null" >
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoType != null" >
+        #{videoType,jdbcType=INTEGER},
+      </if>
+      <if test="videoSize != null" >
+        #{videoSize,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTimeSize != null" >
+        #{videoTimeSize,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadMember != null" >
+        #{uploadMember,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.seek.stocks.model.Video" >
+    update video
+    <set >
+      <if test="videoName != null" >
+        videoName = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoType != null" >
+        videoType = #{videoType,jdbcType=INTEGER},
+      </if>
+      <if test="videoSize != null" >
+        videoSize = #{videoSize,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTimeSize != null" >
+        videoTimeSize = #{videoTimeSize,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadMember != null" >
+        uploadMember = #{uploadMember,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where videoId = #{videoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.seek.stocks.model.Video" >
+    update video
+    set videoName = #{videoName,jdbcType=VARCHAR},
+      videoType = #{videoType,jdbcType=INTEGER},
+      videoSize = #{videoSize,jdbcType=VARCHAR},
+      videoTimeSize = #{videoTimeSize,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      uploadMember = #{uploadMember,jdbcType=VARCHAR}
+    where videoId = #{videoId,jdbcType=INTEGER}
+  </update>
+</mapper>
